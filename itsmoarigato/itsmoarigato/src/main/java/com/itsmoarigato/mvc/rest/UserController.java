@@ -28,10 +28,10 @@ public class UserController {
         return auth.getName();
     }
    
-   /* @RequestMapping(value="/rest/user/{email}",method=RequestMethod.GET)
+   @RequestMapping(value="/rest/user/{email}",method=RequestMethod.GET)
     User friend(@PathVariable("email")String email){
      return userManager.getUser(me(), email);
-    }*/
+    }
     
 	@RequestMapping(value="/rest/user/{email}/friend",method=RequestMethod.GET)
 	List<User> friends(@PathVariable("email")String email){
