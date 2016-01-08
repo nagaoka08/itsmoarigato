@@ -10,6 +10,7 @@
 				ko.applyBindings(viewModel);
 				var url = $("#arigatoForm").attr("action");
 				get(url,'',function(data){
+				
 					viewModel.arigatos(data)
 					$(".delete").on({
 						mouseover : function(){
