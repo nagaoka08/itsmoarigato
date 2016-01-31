@@ -14,23 +14,22 @@
 				if(toUserEmail == "undefined"){ 
 					var url = "/rest/user/"+$("#currentUser").val()+"/friend";
 
-				get(url,'',function(data){
-					viewModel.friends(data)
-					$(".face").each(function(){
-						$(this).mouseover(function(){
-							$(this).css('background-color','#fad0d0')
-						})
-						$(this).mouseout(function(){
-							$(this).css('background-color','#ffffff')
-						})
-						$(this).click(function(){
-							var email = $('.email',$(this)).val()
-							$("#toUserId").val(email)
+					get(url,'',function(data){
+						viewModel.friends(data)
+						$(".face").each(function(){
+							$(this).mouseover(function(){
+								$(this).css('background-color','#fad0d0')
+							})
+							$(this).mouseout(function(){
+								$(this).css('background-color','#ffffff')
+							})
+							$(this).click(function(){
+								var email = $('.email',$(this)).val()
+								$("#toUserId").val(email)
+							})
 						})
 					})
-				})
-				}
-				else{
+				}else{
 					$("#toUserId").val(toUserEmail)
 				}
 				
