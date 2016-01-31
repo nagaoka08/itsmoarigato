@@ -63,7 +63,7 @@
 				text-align: center;
 			}
 			a {
-					color: green;
+				color: green;
 			}
 			.navbar-form {
 				margin-left: 1em;
@@ -83,6 +83,7 @@
 
 
 	<body>
+	
 		<div id="wrap">
 			<div class="navbar navbar-inverse navbar-static-top">
 				<div class="navbar-inner">
@@ -93,19 +94,15 @@
 		 th:with="currentUser=${#httpServletRequest.userPrincipal?.principal}">
 	<div th:if="${currentUser != null}">
 			<form class="navbar-form pull-right" th:action="@{/logout}" method="post">
-					<input type="submit" value="ログアウト" />
+					<input type="submit" value="Log out" />
 			</form>
 			<input type="hidden" id="currentUser" th:value="${currentUser.username}"/>
-			
+			<input type="hidden" id="currentUserEmail" th:value="${currentUser.user.email}" />
 			<a id="me" th:href="@{/my}">
-			<img th:src="${currentUser.user.image.url}" style="max-height:4em" class="pull-right" th:alt="${currentUser.user.name}"></img>
-			 <p id="un" class="navbar-text pull-right" th:text="${currentUser.user.name}">
+			<img th:src="${currentUser.user.image.url}" style="max-height:3em" class="pull-right" th:alt="${currentUser.user.name}"></img>
+			<p id="un" class="navbar-text pull-right" th:text="${currentUser.user.name}">
 				sample_user
 			</p>
-			<p style="display:none" id="currentUseremail" class="navbar-text pull-right" th:text="${currentUser.user.email}">
-				sample_user
-			</p>
-			
 			</a>
 	</div>
 	<ul class="nav">

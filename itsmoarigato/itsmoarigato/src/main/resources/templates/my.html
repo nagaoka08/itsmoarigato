@@ -122,7 +122,7 @@
 							var url = $("#friendForm").attr("action");
 							var $showButton = $(this) 
 							url = url + "/" + $(".friendId",$showButton.parent()).val() +"/";
-							if($(".friendId",$showButton.parent()).val() == $("#un").text()){
+							if($(".friendId",$showButton.parent()).val() == $("#currentUseremail").text()){
 								location.href="/my"
 							}else{
 								location.href=url

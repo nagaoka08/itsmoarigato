@@ -5,8 +5,19 @@
 <body>
 	<div layout:fragment="content">
 		<script>
+		//FIXME hiddenから取得する 
+			var toUserEmail = location.search.substring(8);
+			
 			var viewModel = new AppViewModel()
 			$(document).ready(function(){
+				//FIXME 自分の友達のIdに含まれるかどうかをチェックする
+				if(toUserEmail == "undefined"){ 
+					
+				}
+				else{
+					$("#toUserId").val(toUserEmail)
+				}
+				
 				ko.applyBindings(viewModel);
 
 				var url = "/rest/user/"+$("#currentUser").val()+"/friend";
@@ -57,6 +68,14 @@
 						var error = eval("(" 	+ data.responseText + ")");
 						if(error.message.indexOf("Validation failed") == 0){
 							$('#result').text("");
+							
+							$('#errors').text("入力エラーがあります。ご確認ください");
+							$.each(error.errors,function(){
+								$('#'+this.field+'_error').text(this.defaultMessage);
+							});
+						}else if('#toUserId'!="bucho@hoge.co.jp"){
+							$('#result').text("");
+							
 							$('#errors').text("入力エラーがあります。ご確認ください");
 							$.each(error.errors,function(){
 								$('#'+this.field+'_error').text(this.defaultMessage);
@@ -98,6 +117,7 @@
 			    self.friends = ko.observableArray([]);
 			}
 		</script>
+		
 		<div id="result"></div>
 		<div id="errors" class="error"></div>
 		<form id="arigatoForm" method="post" th:action="@{/rest/arigato}">
@@ -106,11 +126,13 @@
 			<table>
 				<tr data-bind="foreach: friends">
 					<td class="face">
-						<img data-bind="attr:{src: image.url}" style="max-height:2em" ></img><br /><span data-bind="text: name" /><input type="hidden" class="email" data-bind="attr:{value: email}"/>
+						<img data-bind="attr:{src: image.url}" style="max-height:2em" ></img><br />
+						<span data-bind="text: name" />
+						<input type="hidden" class="email" data-bind="attr:{value: email}"/>
 					</td>
 				</tr>
 			</table>
-			<input type="text" id="toUserId" name="toUserId" readonly="true"/>
+			<input type="text" id="toUserId" name="toUserId" /><!--readonly="true"-->
 			<span id="toUserId_error" class="error" /></td></tr>
 			<tr><td>件名</td><td><input type="text" id="subject" name="subject" /><span id="subject_error" class="error" /></td></tr>
 			<tr><td>感謝のことば</td><td><input type="text" id="message" name="message" /><span id="message_error" class="error" /></td></tr>

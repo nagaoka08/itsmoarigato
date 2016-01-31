@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * Controller for sending the user to the login view.
@@ -23,19 +24,22 @@ public class IndexController {
 		return "my";
 	}
 
+	//FIXME UserIdをRequestparamから取得する
 	@RequestMapping("/create")
-	public String create() {
+	public String create(@RequestParam("userId")String userId,Model model) {
+		model.addAttribute("userId",userId);
 		return "create";
 	}
 
 	@RequestMapping("/update/{id}")
 	public String update(@PathVariable("id")String id,Model model) {
-		model.addAttribute("arigatoId", id);
+		model.addAttribute("arigatoId",id);
 		return "update";
 	}
-	@RequestMapping("/friend/{id}")
-	public String friend(@PathVariable("id")String id,Model model){
-		model.addAttribute("friendName",id);
+	
+	@RequestMapping("/friend/{email}")
+	public String friend(@PathVariable("email")String email,Model model){
+		model.addAttribute("friendEmail",email);
 		return "friend";
 	}
 }

@@ -7,11 +7,14 @@
 		<script>
 			var viewModel = new AppViewModel()
 			$(document).ready(function(){
+			$("#toCreate").attr("href",$("#toCreate").attr("href")+"?userId="+$("#friendEmail").val())
 				ko.applyBindings(viewModel);
+
 				var url = $("#arigatoForm").attr("action");
+
 				get(url,'',function(data){
-				
 					viewModel.arigatos(data)
+
 					$(".delete").on({
 						mouseover : function(){
 							$(this).css('cursor','pointer');
@@ -47,12 +50,10 @@
 							var url = $("#friendForm").attr("action");
 							var $showButton = $(this) 
 							url = url + "/" + $(".friendId",$showButton.parent()).val() +"/";
-							if($(".friendId",$showButton.parent()).val() == $("#currentUseremail").text()){
+							if($(".friendId",$showButton.parent()).val() == $("#currentUserEmail").val()){
 								location.href="/my"
-								//location.href=url
 							}else{
 								location.href=url
-								//location.href="/my"
 							}
 						}
 					})
@@ -93,6 +94,7 @@
 					alert("fail" + data.responseText);
 				})
 			}
+
 			function AppViewModel() {
 			    var self = this;
 			    
@@ -104,7 +106,7 @@
 		
 		<div id="around">
 		<div data-bind="foreach: arigatos">
-			<table>
+			<table class="arigato">
 			<tr>
 				<td>
 					<span data-bind="if: fromUser.email == $parent.me">
@@ -118,7 +120,7 @@
 					<tr>
 						<td>
 						<img data-bind="attr:{src: fromUser.image.url}" style="max-height:2em" class="icon">
-							<input type="hidden" class="friendId" data-bind="attr:{value:fromUser.email}" />							
+							<input type="hidden" class="friendId" data-bind="attr:{value:fromUser.email}" />
 						</img><br /><span data-bind="text: fromUser.name"></span></td>
 						<td><img th:src="@{/resources/img/to.png}" style="max-height:3em" ></img></td>
 						<td><img data-bind="attr:{src: toUser.image.url}" style="max-height:2em" class="icon">
