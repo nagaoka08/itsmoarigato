@@ -12,15 +12,7 @@
 			$(document).ready(function(){
 				//FIXME 自分の友達のIdに含まれるかどうかをチェックする
 				if(toUserEmail == "undefined"){ 
-					
-				}
-				else{
-					$("#toUserId").val(toUserEmail)
-				}
-				
-				ko.applyBindings(viewModel);
-
-				var url = "/rest/user/"+$("#currentUser").val()+"/friend";
+					var url = "/rest/user/"+$("#currentUser").val()+"/friend";
 
 				get(url,'',function(data){
 					viewModel.friends(data)
@@ -37,6 +29,14 @@
 						})
 					})
 				})
+				}
+				else{
+					$("#toUserId").val(toUserEmail)
+				}
+				
+				ko.applyBindings(viewModel);
+
+				
 
 				$("#submit").click(function(){
 					$("#submit").prop("disabled",true);
