@@ -61,6 +61,8 @@
 			var viewModel = new AppViewModel()
 			
 			$(document).ready(function(){
+			$("#toCreate").attr("href",$("#toCreate").attr("href")+"?userId="+$("#friendEmail").val())
+			
 				$("#text_2").hide(); //初期では非表示
 				$("ul").on("click","li",function(){
 					$("li.selected").removeClass("selected");
